@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="telephone=no" name="format-detection"/>
+    <meta content="email=no" name="format-detection"/>
+    <title>领鲜</title>
+
+    <style>
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-touch-callout: none;
+        }
+        body {
+            background-color: #fff;
+            line-height: 1.4;
+            overflow-y:visible !important;
+            -webkit-touch-callout:none;
+            -webkit-user-select:none;
+            user-select:none;
+            -webkit-overflow-scrolling: touch;
+        }
+        html,body{
+            margin: 0;
+            padding: 0;
+        }
+        body *{
+            box-sizing:border-box;
+            -moz-box-sizing:border-box; /* Firefox */
+            -webkit-box-sizing:border-box; /* Safari */
+        }
+        .img-warp{
+            text-align: center;
+            margin-top: 35%;
+        }
+        .img-warp img{
+            width: 120px;
+            height: 120px;
+            -webkit-border-radius: 24px;
+            -moz-border-radius: 24px;
+            border-radius: 24px;
+            border: 1px solid #ddd;
+        }
+        .down-warp{
+            height: 45px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .down-warp a{
+            width: 40%;
+            height: 45px;
+            line-height: 45px;
+            background: #1abc9c;
+            display: inline-block;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        .app-jiesao{
+            margin: 30px 20px 0;
+            border: 1px solid #eee;
+            padding: 20px;
+            background: #fff;
+            margin-bottom: 30px;
+            border-radius: 6px;
+        }
+        .app-jiesao p{
+            margin: 0;
+            font-size: 20px;
+            line-height: 25px;
+        }
+        .app-jiesao div{
+            color: #666;
+            padding-top: 10px;
+        }
+    </style>
+
+</head>
+<body>
+<div>
+    <div class="img-warp">
+        <p style="font-size: 20px;">领鲜</p>
+        <img src="./logo.png" alt="">
+    </div>
+    <div class="down-warp" style="height: 45px;margin-top: 30px;">
+        <a href="javascript:void(0)" id="download">点击下载</a>
+    </div>
+    <div class="app-jiesao">
+        <p>应用介绍</p>
+        <div>
+            这是一个水果商城
+        </div>
+    </div>
+</div>
+<script type="text/JavaScript">
+    var browser = {
+        versions: function () {
+            var u = navigator.userAgent, app = navigator.appVersion;
+            return {         //移动终端浏览器版本信息
+                trident: u.indexOf('Trident') > -1, //IE内核
+                presto: u.indexOf('Presto') > -1, //opera内核
+                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                iPad: u.indexOf('iPad') > -1, //是否iPad
+                webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+            };
+        }(),
+        language: (navigator.browserLanguage || navigator.language).toLowerCase()
+    }
+
+    function navigatorToUrl() {
+        if (browser.versions.mobile) {//判断是否是移动设备打开。browser代码在下面
+            var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+            /*微信*/
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                confirm('请点击微信右上角按钮，然后再弹出的菜单中，点击在浏览器中打开，即可安装');
+            }else{  //浏览器中打开
+                location.href = "http://39.108.141.187:3000/lingxian.apk";
+            }
+        }
+    }
+    navigatorToUrl();
+    document.getElementById('download').addEventListener("click",function(){
+        navigatorToUrl();
+    })
+</script>
+</body>
+</html>
